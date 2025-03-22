@@ -7,7 +7,7 @@ import { ImageGallery } from '../components'
 
 export const NoteView = () => {
   return (
-    <Box sx={{ mb: 1 }}>
+    <Box sx={{ mb: 1 }} className="animate__animated animate__fadeIn animate__faster">
       {/* Encabezado con fecha y botón */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography fontSize={39} fontWeight="light">

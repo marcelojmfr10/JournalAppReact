@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material"
 
 export const NothingSelectedView = () => {
   return (
-    <Box
+    <Box className="animate__animated animate__fadeIn animate__faster"
       display="flex"
       flexDirection="column"
       alignItems="center"

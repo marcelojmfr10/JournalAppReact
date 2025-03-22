@@ -10,12 +10,12 @@ import { getFirestore } from 'firebase/firestore/lite';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAvIWI8FSROdUf0hhFIDpcSChFY4-7PW8c",
-  authDomain: "react-cursos-15fa6.firebaseapp.com",
-  projectId: "react-cursos-15fa6",
-  storageBucket: "react-cursos-15fa6.firebasestorage.app",
-  messagingSenderId: "117397975710",
-  appId: "1:117397975710:web:c96fadd498309bba3c018f"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase

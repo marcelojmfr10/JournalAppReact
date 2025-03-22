@@ -1,10 +1,10 @@
 
-import { useState } from "react"
-import { Box, TextField, Typography, Grid2, Button, Link } from "@mui/material"
+import { useMemo, useState } from "react"
+import { Box, TextField, Typography, Grid2, Button, Link, Alert } from "@mui/material"
 import { Link as RouterLink } from "react-router"
 import { AuthLayout } from "../layout/AuthLayout"
 import { useForm } from "../../hooks"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { startCreatingUserWithEmailPassword } from "../../store/auth"
 
 const formData = {
@@ -23,23 +23,26 @@ export const RegisterPage = () => {
 
   const dispatch = useDispatch();
 
-  const [formSubmitted, setFormSubmitted] =useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const { displayName, email, password, onInputChange, formState, isFormValid, emailValid, 
+  const { status, errorMessage } = useSelector(state => state.auth);
+  const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
+
+  const { displayName, email, password, onInputChange, formState, isFormValid, emailValid,
     passwordValid, displayNameValid } = useForm(formData, formValidations);
 
   const onSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
-    if(!isFormValid) return;
+    if (!isFormValid) return;
 
-    dispatch(startCreatingUserWithEmailPassword(formState));    
+    dispatch(startCreatingUserWithEmailPassword(formState));
   }
 
   return (
     <AuthLayout title="Crear Cuenta">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="animate__animated animate__fadeIn animate__faster">
         <Grid2 container spacing={2}>
           <Grid2 size={{ xs: 12, md: 12 }}>
             <TextField
@@ -92,8 +95,14 @@ export const RegisterPage = () => {
 
         {/* New */}
         <Grid2 container spacing={2} sx={{ mt: 2 }}>
+          <Grid2 size={{ xs: 12, md: 12 }} display={!!errorMessage ? '' : 'none'}>
+            <Alert severity="error">
+              {errorMessage}
+            </Alert>
+          </Grid2>
+
           <Grid2 size={{ xs: 12, md: 12 }}>
-            <Button type="submit" variant="contained" fullWidth>
+            <Button type="submit" variant="contained" fullWidth disabled={isCheckingAuthentication}>
               Crear Cuenta
             </Button>
           </Grid2>

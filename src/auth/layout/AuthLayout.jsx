@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material"
 
 export const AuthLayout = ({children, title = ''}) => {
     return (
-        <Box
+        <Box 
             component="main"
             sx={{
                 display: "flex",
